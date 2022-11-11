@@ -18,10 +18,10 @@ Connect chat by websocket with user_id and pub/sub by redis.
  * Separate listen and spread
  * Each part works on each goroutine
 ```go
-// websocket(web) -> redis.publish
+// redis.subscribe -> websocket(web) 
 func rxChat(...)
 
-// redis.subscribe -> websocket(web) 
+// websocket(web) -> redis.publish
 func txChat(...)
 ```
 <br />
