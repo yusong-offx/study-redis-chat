@@ -1,0 +1,16 @@
+## Stage 1
+FROM golang AS builder
+
+WORKDIR /buildfile
+COPY . /buildfile/
+
+RUN CGO_ENABLED=0 go build -o app-server main.go
+
+## Stage 2
+FROM alpine
+
+# RUN mkdir /myapp
+WORKDIR /
+COPY --from=builder /buildfile/app-server /
+
+CMD ["/app-server"]
